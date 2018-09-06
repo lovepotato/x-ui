@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="./lib/gf.js"></script>
+    <link rel="stylesheet" href="./lib/styles/gf.css">
+    <title>gf-ui-test</title>
+  </head>
+  <body>
+    <div id="app">
+        <gf-table height="500" :columns="columns11" :data="data10" :page="page" :draggable="drag"></gf-table>
+    </div>
+  </body>
+
+  <script>
+    var vue = new Vue({
+      el: '#app',
+      data () {
+          return {
+            drag:true,
+            data10: [],
+            page: {
+              isServerPage: true,
+              pageSize: 4,
+              totalPage: 900,
+              pagingCB: (from, to, pageSize, sort) => {
+                  console.log(sort)
+                  this.http.get(`http://192.168.1.51:3000/StudioApi/Materials?PageSize=4&PageNumber=${to}&OrderBy=Name`).then((res) => {
+                      // console.log(res)
+                      this.data1 = res.data.data
+                  })
+              }
+            },
+            columns11: [
+                    {
+                        // title: 'index',
+                        type: 'selection',
+                        align: 'center',
+                        width:100,
+                        // fixed: 'left',
+                    },
+                    {
+                        title: 'Name',
+                        key: 'name',
+                        align: 'center',
+                        width: 200,
+                        // fixed: 'left',
+                        filters: [
+                            {
+                                label: 'Joe',
+                                value: 1
+                            },
+                            {
+                                label: 'John',
+                                value: 2
+                            }
+                        ],
+                        filterMultiple: false,
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.name === 'Joe';
+                            } else if (value === 2) {
+                                return row.name === 'John Brown';
+                            }
+                        }
+                    },
+                    {
+                        type:'expand',
+                        width:100,
+                        render(h, params) {
+                            return h('strong',['拓展区域'])
+                        }
+                    },
+                    {
+                        title: 'Other',
+                        align: 'center',
+                        renderHeader (h, params) {
+                            return h('div',{
+                                    style: {
+                                        height: '100%',
+                                        width: '100%',
+                                        color: 'white',
+                                        backgroundColor: '#7ca8ff'
+                                    },                              
+                                },
+                                [h('strong', params.column.title)]
+                            )
+                        },
+                        children: [
+                            {
+                                title: 'Age',
+                                key: 'age',
+                                align: 'center',
+                                width: 200,
+                                sortable: true
+                            },
+                            {
+                                title: 'Address',
+                                align: 'center',
+                                children: [
+                                    {
+                                        title: 'Street',
+                                        key: 'street',
+                                        align: 'center',
+                                        width: 200
+                                    },
+                                    {
+                                        title: 'Block',
+                                        align: 'center',
+                                        renderHeader (h, params) {
+                                            return h('div',{
+                                                    style: {
+                                                        height: '100%',
+                                                        width: '100%',
+                                                        // color: 'white',
+                                                        backgroundColor: 'pink'
+                                                    },                              
+                                                },
+                                                [h('strong', params.column.title)]
+                                            )
+                                        },
+                                        children: [
+                                            {
+                                                title: 'Building',
+                                                key: 'building',
+                                                align: 'center',
+                                                width: 200,
+                                                sortable: true,
+                                                type: 'input'
+                                            },
+                                            {
+                                                title: 'Door No.',
+                                                key: 'door',
+                                                align: 'center',
+                                                width: 200
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Company',
+                        align: 'center',
+                        children: [
+                            {
+                                title: 'Company Address',
+                                key: 'caddress',
+                                align: 'center',
+                                width: 200
+                            },
+                            {
+                                title: 'Company Name',
+                                key: 'cname',
+                                align: 'center',
+                                width: 200
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Gender',
+                        key: 'gender',
+                        align: 'center',
+                        width: 200,
+                        // fixed: 'right'
+                    }
+                ],
+          }
+      },
+      created() {
+        const data = [];
+        for (let i = 0; i < 20; i++) {
+            data.push({
+                key: i,
+                name: 'John Brown',
+                age: i + 1,
+                street: 'Lake Park',
+                building: 'C',
+                door: 2035,
+                caddress: 'Lake Street 42',
+                cname: 'SoftLake Co',
+                gender: 'M',
+            });
+        }
+        this.data10 = data;
+      }
+    })
+  </script>
+</html>
