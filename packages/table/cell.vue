@@ -3,7 +3,7 @@
         <template v-if="renderType === 'index'">{{naturalIndex + 1}}</template>
         <template v-else-if="renderType === 'expand' && !row._disableExpand">
             <div :class="[prefixCls + '-cell-expand' ,{[prefixCls + '-cell-expand-expanded'] : isExpand}]" @click="emitExpand">
-                <i class="gf-icon icon-ios-arrow-forward"></i>
+                <i class="gf-icon gf-icon-ios-arrow-forward"></i>
             </div>
         </template>
         <template v-else-if="renderType === 'input'">

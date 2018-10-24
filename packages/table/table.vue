@@ -435,6 +435,9 @@
                         this.tableWidth = this.cloneColumns.map(cell => cell.width).reduce((a, b) => a + b, 0);
                     } else {
                         this.tableWidth = parseInt(getStyle(this.$el, 'width')) - 1;
+                        if(isNaN(this.tableWidth)){
+                            this.tableWidth = this.width
+                        }
                     }
                     this.columnsWidth = {};
                     if (!this.$refs.tbody) return;
