@@ -102,7 +102,7 @@
             <div :class="[prefixCls + '-loading']" v-if="loading">
                 <slot name="loading">
                     <div class="gf-spin-main">
-                        <i class="spin-icon-load gf-icon icon-load-c" style="font-size: 18px;"></i> 
+                        <i class="spin-icon-load gf-icon gf-icon-load-c" style="font-size: 18px;"></i> 
                         <div>Loading</div>
                     </div>
                 </slot>
