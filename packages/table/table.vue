@@ -429,16 +429,22 @@
         },
         methods: {
             handleResize () {
-                this.$nextTick(() => {
-                    const allWidth = !this.cloneColumns.some(cell => !cell.width);
-                    if (allWidth) {
-                        this.tableWidth = this.cloneColumns.map(cell => cell.width).reduce((a, b) => a + b, 0);
-                    } else {
-                        this.tableWidth = parseInt(getStyle(this.$el, 'width')) - 1;
-                        if(isNaN(this.tableWidth)){
-                            this.tableWidth = this.width
+                this.$nextTick((width) => {
+                    let allWidth
+                    if(width == undefined){
+                        allWidth = !this.cloneColumns.some(cell => !cell.width);
+                        if (allWidth) {
+                            this.tableWidth = this.cloneColumns.map(cell => cell.width).reduce((a, b) => a + b, 0);
+                        } else {
+                            this.tableWidth = parseInt(getStyle(this.$el, 'width')) - 1;
+                            if(isNaN(this.tableWidth)){
+                                this.tableWidth = this.width
+                            }
                         }
+                    }else{
+                        this.tableWidth = width
                     }
+
                     this.columnsWidth = {};
                     if (!this.$refs.tbody) return;
                     this.$nextTick(() => {
@@ -926,6 +932,11 @@
                 this.$emit(status ? 'on-select' : 'on-select-cancel', selection, JSON.parse(JSON.stringify(this.data[_index])));
                 this.$emit('on-selection-change', selection);
             },
+            toggleAllExpand (isOpen) {
+                for (let i in this.objData) {
+                    this.objData[i]._isExpanded = isOpen
+                } 
+            },
             toggleExpand (_index) {
                 let data = {};
 
@@ -983,7 +994,7 @@
                 // this.dragDisableHover = true
             },
             getTableData() {
-                const tempData = deepCopy(this.rebuildData)
+                const tempData = deepCopy(this.$refs.tbody.cloneData)
                 for(let value of tempData)
                 {
                     delete value._index

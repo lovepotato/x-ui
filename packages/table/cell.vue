@@ -51,7 +51,6 @@
                 renderType: '',
                 isEditing: false,
                 prevData: this.row[this.column.key],
-                isExpand:false,
             }
         },
         watch: {
@@ -90,7 +89,10 @@
             },
             isSelect() {
                 return this.$parent.$parent.objData[this.index]._isChecked
-            } 
+            },
+            isExpand() {
+                return this.$parent.$parent.objData[this.index]._isExpanded
+            }
         },
         methods: {
             clickCell(row, column) {
@@ -115,11 +117,6 @@
                 }
             },
             emitExpand() {
-                if(this.$parent.$parent.objData[this.index]._isExpanded){
-                    this.isExpand = false
-                }else{
-                    this.isExpand = true
-                }
                 // this.$emit('changeExpand',this.index)
                 this.$parent.$parent.$parent.toggleExpand(this.index)
             },
