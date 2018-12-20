@@ -428,8 +428,8 @@
             }
         },
         methods: {
-            handleResize () {
-                this.$nextTick((width) => {
+            handleResize (width) {
+                this.$nextTick(() => {
                     let allWidth
                     if(width == undefined){
                         allWidth = !this.cloneColumns.some(cell => !cell.width);
