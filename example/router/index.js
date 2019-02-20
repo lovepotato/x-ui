@@ -36,6 +36,6 @@ routes.push({
 })
 // console.log(routes)
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: routes
 })

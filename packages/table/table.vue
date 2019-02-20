@@ -377,20 +377,23 @@
             },
         },
         watch: {
-            data (newVal, oldVal) {
-                // this.tableData = this.makeData(newVal)
+            data: {
+                handler (newVal, oldVal) {
+                    // this.tableData = this.makeData(newVal)
 
-                //如果当前为远程数据，则数据改变时不更新分页数据
-                if(!this.isServerPage) this.pageData = this.makePageData(this.page)
-                
-                this.objData = this.makeObjData()
-
-                const oldDataLen = this.rebuildData.length;
-                this.rebuildData = this.makeDataWithSortAndFilter();
-                this.handleResize();
-                // if (!oldDataLen) {
+                    //如果当前为远程数据，则数据改变时不更新分页数据
+                    if(!this.isServerPage) this.pageData = this.makePageData(this.page)
                     
-                // }
+                    this.objData = this.makeObjData()
+
+                    const oldDataLen = this.rebuildData.length;
+                    this.rebuildData = this.makeDataWithSortAndFilter();
+                    this.handleResize();
+                    // if (!oldDataLen) {
+                        
+                    // }
+                },
+                deep: true
             },
             page: {
                 handler (newVal, oldVal) {
