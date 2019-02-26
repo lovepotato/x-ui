@@ -1,6 +1,6 @@
-# gf-ui
+# x-ui
 
-> gf-ui
+> x-ui
 
 ## Build Setup
 
