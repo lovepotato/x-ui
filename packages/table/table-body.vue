@@ -29,13 +29,11 @@
                     </tr>
                     
                     <template v-if="rowExpanded(row._index) && !draggable">
-                        <transition name="fade">
-                            <tr :class="{[prefixCls + '-expanded-hidden']: fixed}">
-                                <td :colspan="columns.length" :class="prefixCls + '-expanded-cell'">
-                                    <Expand :key="row._rowKey" :row="row" :render="expandRender" :index="row._index"></Expand>
-                                </td>
-                            </tr>    
-                        </transition>
+                        <tr :class="{[prefixCls + '-expanded-hidden']: fixed}">
+                            <td :colspan="columns.length" :class="prefixCls + '-expanded-cell'">
+                                <Expand :key="row._rowKey" :row="row" :render="expandRender" :index="row._index"></Expand>
+                            </td>
+                        </tr>    
                     </template>
                 </template>
             </draggable>
