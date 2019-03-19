@@ -1447,6 +1447,8 @@
 | on-row-dblclick  | 双击某一行时触发 | row:当前行的数据；index：当前行索引 |
 | on-expand        | 展开或收起某一行时触发 | row：当前行的数据；status：当前的状态 |
 | on-drag-end      | 拖拽一行结束后触发 | newIndex：拖拽行前的索引；oldIndex：拖拽行后的索引，item：当前拖拽的元素(dom元素) |
+| on-row-mousein   | 鼠标进入某一行时触发 | row:当前行的数据；index：当前行索引 |
+| on-row-mouseout   | 鼠标离开某一行时触发 | row:当前行的数据；index：当前行索引 |
 
 </br>
 

@@ -1,21 +1,19 @@
 <template>
-    <div id='app'>
+    <!-- <div id='app'>
         <ui-head></ui-head>
         <div class="container" ref="container">
             <side-nav class="nav"></side-nav>
             <router-view class="view"></router-view>
         </div>
         <mainFooter :footPosition='footPosition'></mainFooter>
-        <!-- <gfTable  :columns="columns8" :data="[]" border>
-            <div style="height: 200px;line-height: 200px" slot="nodata">asdsadsad</div>
-        </gfTable> -->
-    </div>
-    <!-- <div id="app" style="width:1000px;"> -->
-        <!-- <gf-table height="500" :columns="columns11" :data="data10" :page="page" :border="test" :row-class-name="rowClassName"
-            @on-sort-change="sortTest" :loading="loading" @on-select="os" @on-select-cancel="osc" @on-selection-change="osch" @on-select-all="osa" :draggable="drag"></gf-table>
+    </div> -->
+    <div id="app" style="width:1000px;"> -->
+        <gf-table height="500" :columns="columns11" :data="data10" :page="page" :border="test" :row-class-name="rowClassName"
+            @on-sort-change="sortTest" :loading="loading" @on-select="os" @on-select-cancel="osc" @on-selection-change="osch" @on-select-all="osa" :draggable="drag"
+            @on-row-mousein="rowMouseIn"  @on-row-mouseout="rowMouseOut"></gf-table>
         <button @click="change">ceshi</button>
-        <button @click="changeDrag">drag</button> -->
-    <!-- </div> -->
+        <button @click="changeDrag">drag</button>
+    </div>
     
 </template>
 
@@ -318,9 +316,21 @@
                         // fixed: 'right'
                     }
                 ],
+                timeOutFunction: ''
             }
         },
         methods: {
+            rowMouseIn() {
+                // console.log(...arguments)
+                this.timeOutFunction = setTimeout(() => {
+                    arguments[0]._isExpanded = true
+                }, 800)
+            },
+
+            rowMouseOut() {
+                clearTimeout(this.timeOutFunction)
+                // console.log(...arguments)
+            },
             change() {
                 this.test = !this.test;
                 this.loading = !this.loading

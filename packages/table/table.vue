@@ -520,11 +520,13 @@
                 if (this.disabledHover || this.dragDisableHover) return;
                 if (this.objData[_index]._isHover) return;
                 this.objData[_index]._isHover = true;
+                this.$emit('on-row-mousein', this.objData[_index], _index)
                 // console.log('in', _index)
             },
             handleMouseOut (_index) {
                 if (this.disabledHover || this.dragDisableHover) return;
                 this.objData[_index]._isHover = false;
+                this.$emit('on-row-mouseout', this.objData[_index], _index)
                 // console.log('out', _index)
             },
             //滑动事件
