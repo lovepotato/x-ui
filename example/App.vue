@@ -1,19 +1,19 @@
 <template>
-    <!-- <div id='app'>
+    <div id='app'>
         <ui-head></ui-head>
         <div class="container" ref="container">
             <side-nav class="nav"></side-nav>
             <router-view class="view"></router-view>
         </div>
         <mainFooter :footPosition='footPosition'></mainFooter>
-    </div> -->
-    <div id="app" style="width:1000px;"> -->
+    </div>
+    <!-- <div id="app" style="width:1000px;">
         <gf-table height="500" :columns="columns11" :data="data10" :page="page" :border="test" :row-class-name="rowClassName"
             @on-sort-change="sortTest" :loading="loading" @on-select="os" @on-select-cancel="osc" @on-selection-change="osch" @on-select-all="osa" :draggable="drag"
             @on-row-mousein="rowMouseIn"  @on-row-mouseout="rowMouseOut"></gf-table>
         <button @click="change">ceshi</button>
         <button @click="changeDrag">drag</button>
-    </div>
+    </div> -->
     
 </template>
 
